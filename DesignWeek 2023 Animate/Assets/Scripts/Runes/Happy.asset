@@ -16,5 +16,5 @@ MonoBehaviour:
   personality: 1
   motivation: 0
   runeJob: 0
-  runeAsset: {fileID: 21300000, guid: 097173aa50718d64688e7ca80cb9666a, type: 3}
+  runeAsset: {fileID: 21300000, guid: 453a251e7c64ab74e80f216371d26746, type: 3}
   linePlaces: []
