@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d156281c7aefa1448f85b77b71c9c26, type: 3}
-  m_Name: New Rune
+  m_Name: Low
   m_EditorClassIdentifier: 
-  runeType: 0
+  runeType: 1
   personality: 0
-  motivation: 0
-  runeAsset: {fileID: 0}
+  motivation: 3
+  runeJob: 0
+  runeAsset: {fileID: 21300000, guid: 067f76c276e27b64cb7139da3cca79d3, type: 3}
+  linePlaces: []
