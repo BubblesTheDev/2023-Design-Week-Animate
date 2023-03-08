@@ -8,7 +8,6 @@ public class runeDataContainer : ScriptableObject
     public runeTypes runeType;
     public string runeDescription;
 
-    public float manaCost;
     public personalityTypes personality;
     public motivationLevels motivation;
     public jobs runeJob;
@@ -54,7 +53,7 @@ public class runeDataEditor : Editor
 
         container.runeType = (runeTypes)EditorGUILayout.EnumPopup("Rune Type: ", container.runeType);
         EditorGUILayout.LabelField("Rune Description: ");
-        container.runeDescription = EditorGUILayout.TextArea("Write description for rune here", GUILayout.Height(50));
+        container.runeDescription = EditorGUILayout.TextArea(container.runeDescription, GUILayout.Height(50));
 
         EditorGUILayout.Space(20);
         switch (container.runeType)
@@ -69,7 +68,6 @@ public class runeDataEditor : Editor
                 container.personality = (personalityTypes)EditorGUILayout.EnumPopup("Object's Personality: ", container.personality);
                 break;
         }
-        container.manaCost = EditorGUILayout.FloatField("Rune Mana Cost: ", container.manaCost);
         EditorGUILayout.PropertyField(m_runeAssetSprite,new GUIContent("Rune Asset Sprite: "));
         EditorGUILayout.PropertyField(m_linePlaces, new GUIContent("Rune line Points: "));
         serializedObject.ApplyModifiedProperties();
