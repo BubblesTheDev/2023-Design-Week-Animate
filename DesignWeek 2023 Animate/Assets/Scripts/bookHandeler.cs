@@ -47,6 +47,7 @@ public class bookHandeler : MonoBehaviour {
             }
         }
         bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
+        bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
         properRightPage.SetActive(false);
 
         bookObject.SetActive(false);
@@ -132,21 +133,16 @@ public class bookHandeler : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        //Once book is in center of screen, play animation of opening
-        //wait for animation to finish
-        yield return new WaitForSeconds(2f);
-
         properRightPage.SetActive(true);
         bookObject.transform.Find("LeftPage").gameObject.SetActive(true);
+        bookObject.transform.Find("PageButtons").gameObject.SetActive(true);
     }
 
     public IEnumerator disableBook() {
         properRightPage.SetActive(false);
         bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
+        bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
 
-        //play animation to close book
-        //wait for it to finish
-        yield return new WaitForSeconds(2f);
 
         while (bookObject.transform.localPosition != startingPos.transform.position)
         {

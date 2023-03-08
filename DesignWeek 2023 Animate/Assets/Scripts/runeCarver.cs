@@ -8,9 +8,6 @@ public class runeCarver : MonoBehaviour {
     [Header("Graphics")]
     [SerializeField] private Image runeCircle;
     public Image runeTraceImage;
-    [SerializeField] private Text runeNameText;
-    [SerializeField] private Text runeDescription;
-    [SerializeField] private Image runeExampleImage;
 
     [Header("Drawing Settings")]
     public LineRenderer carvingLine;
@@ -18,7 +15,6 @@ public class runeCarver : MonoBehaviour {
     public runeDataContainer runeSelected;
     [SerializeField] private Vector3 boundCorner1, boundCorner2;
     [SerializeField] private float maxDistanceBetweenPoints, maxNumOfPoints;
-    [SerializeField] private runeTypes currentRuneToCarve;
     [SerializeField] private float errorDistance;
     [SerializeField] private float screenDepthValue;
 
