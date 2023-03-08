@@ -16,9 +16,11 @@ public class runeCarver : MonoBehaviour {
     public LineRenderer carvingLine;
     public GameObject objToCarve;
     public runeDataContainer runeSelected;
-    [SerializeField] private float maxDistanceBetweenPoints;
+    [SerializeField] private Vector3 boundCorner1, boundCorner2;
+    [SerializeField] private float maxDistanceBetweenPoints, maxNumOfPoints;
     [SerializeField] private runeTypes currentRuneToCarve;
     [SerializeField] private float errorDistance;
+    [SerializeField] private float screenDepthValue;
 
     [Header("General Settings")]
     public runeDataContainer currentSelectedPersonality;
@@ -33,7 +35,6 @@ public class runeCarver : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1)) {
             removeLine();
         }
-
         runeInformation();
     }
 
@@ -42,16 +43,28 @@ public class runeCarver : MonoBehaviour {
     }
 
     void carveRune() {
+        Vector3 screenPos = Input.mousePosition;
+        screenPos.z = screenDepthValue;
 
-        if (carvingLine.positionCount == 0) {
-            carvingLine.positionCount++;
-            carvingLine.SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
+        if (Camera.main.ScreenToWorldPoint(screenPos).x > boundCorner1.x + carvingLine.startWidth/2
+            && Camera.main.ScreenToWorldPoint(screenPos).x < boundCorner2.x - carvingLine.startWidth/2
+            && Camera.main.ScreenToWorldPoint(screenPos).y < boundCorner1.y - carvingLine.startWidth/2
+            && Camera.main.ScreenToWorldPoint(screenPos).y > boundCorner2.y + carvingLine.startWidth/2)
+        {
+            if (carvingLine.positionCount == 0)
+            {
+                carvingLine.positionCount++;
+                carvingLine.SetPosition(0, Camera.main.ScreenToWorldPoint(screenPos));
 
-        } else if (Vector3.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)), carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints) {
-            carvingLine.positionCount++;
-            carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
-        } else if (carvingLine.positionCount > 50) removeLine();
-        
+            }
+            else if (Vector3.Distance(Camera.main.ScreenToWorldPoint(screenPos), carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints)
+            {
+                carvingLine.positionCount++;
+                carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToWorldPoint(screenPos));
+            }
+            else if (carvingLine.positionCount > maxNumOfPoints) removeLine();
+        }
+
     }
 
     void runeInformation()
