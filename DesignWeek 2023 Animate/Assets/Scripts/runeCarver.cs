@@ -10,7 +10,6 @@ public class runeCarver : MonoBehaviour {
     public Image runeTraceImage;
     [SerializeField] private Text runeNameText;
     [SerializeField] private Text runeDescription;
-    [SerializeField] private Text runeManaCost;
     [SerializeField] private Image runeExampleImage;
 
     [Header("Drawing Settings")]
@@ -54,7 +53,6 @@ public class runeCarver : MonoBehaviour {
         if (runeSelected != null)
         {
             runeNameText.text = runeSelected.name + " Rune";
-            runeManaCost.text = "Mana Cost: " + runeSelected.manaCost.ToString();
             runeDescription.text = runeSelected.runeDescription;
             runeExampleImage.sprite = runeSelected.runeAsset;
         }
