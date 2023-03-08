@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d156281c7aefa1448f85b77b71c9c26, type: 3}
-  m_Name: High
+  m_Name: Normie
   m_EditorClassIdentifier: 
   runeType: 1
   personality: 0
-  motivation: 1
+  motivation: 2
   runeJob: 0
-  runeAsset: {fileID: 21300000, guid: 4080c42d698b5234dbe66c83e6190bc5, type: 3}
+  runeAsset: {fileID: 21300000, guid: 91630c3bad65d9249af28d6863e13141, type: 3}
   linePlaces: []
