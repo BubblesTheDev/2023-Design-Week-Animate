@@ -8,6 +8,10 @@ public class runeCarver : MonoBehaviour {
     [Header("Graphics")]
     [SerializeField] private Image runeCircle;
     public Image runeTraceImage;
+    [SerializeField] private Text runeNameText;
+    [SerializeField] private Text runeDescription;
+    [SerializeField] private Text runeManaCost;
+    [SerializeField] private Image runeExampleImage;
 
     [Header("Drawing Settings")]
     public LineRenderer carvingLine;
@@ -24,6 +28,8 @@ public class runeCarver : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1)) {
             removeLine();
         }
+
+        runeInformation();
     }
 
     void removeLine() {
@@ -41,6 +47,17 @@ public class runeCarver : MonoBehaviour {
             carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToViewportPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
         } else if (carvingLine.positionCount > 50) removeLine();
         
+    }
+
+    void runeInformation()
+    {
+        if (runeSelected != null)
+        {
+            runeNameText.text = runeSelected.name + " Rune";
+            runeManaCost.text = "Mana Cost: " + runeSelected.manaCost.ToString();
+            runeDescription.text = runeSelected.runeDescription;
+            runeExampleImage.sprite = runeSelected.runeAsset;
+        }
     }
 
     
