@@ -20,8 +20,8 @@ public class bookHandeler : MonoBehaviour {
     [SerializeField] private List<Image> currentSelectedRunesImages;
     [SerializeField] private List<Text> currentSelectedRunesText;
 
+    [SerializeField] private GameObject startingPos;
     private void Awake() {
-
         createRunesForPages();
     }
 
@@ -122,8 +122,13 @@ public class bookHandeler : MonoBehaviour {
         bookObject.SetActive(true);
         while (bookObject.transform.position != bookObject.transform.parent.transform.position) {
             bookObject.transform.Translate((bookObject.transform.parent.transform.position - bookObject.transform.position) * Time.deltaTime * bookMoveSpeed);
+
             bookObject.transform.localScale = Vector3.Lerp(bookObject.transform.localScale, Vector3.one * 2f, Time.deltaTime * bookMoveSpeed);
-            if (bookObject.GetComponent<RectTransform>().localPosition.x < 0.015f) bookObject.transform.position = bookObject.transform.parent.transform.position;
+            if (bookObject.GetComponent<RectTransform>().localPosition.x < 0.015f)
+            {
+                bookObject.transform.position = bookObject.transform.parent.transform.position;
+                break;
+            }
             yield return new WaitForEndOfFrame();
         }
 
@@ -136,6 +141,28 @@ public class bookHandeler : MonoBehaviour {
     }
 
     public IEnumerator disableBook() {
-        yield return new WaitForEndOfFrame();
+        properRightPage.SetActive(false);
+        bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
+
+        //play animation to close book
+        //wait for it to finish
+        yield return new WaitForSeconds(2f);
+
+        while (bookObject.transform.localPosition != startingPos.transform.position)
+        {
+            bookObject.transform.Translate((startingPos.transform.position - bookObject.transform.position) * Time.deltaTime * bookMoveSpeed);
+
+            bookObject.transform.localScale = Vector3.Lerp(bookObject.transform.localScale, Vector3.one * .25f, Time.deltaTime * bookMoveSpeed);
+            if (bookObject.GetComponent<RectTransform>().localPosition.x > 848)
+            {
+                bookObject.transform.position = startingPos.transform.position;
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(1f);
+        bookObject.SetActive(false);
+
     }
 }

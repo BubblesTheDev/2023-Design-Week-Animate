@@ -45,11 +45,11 @@ public class runeCarver : MonoBehaviour {
 
         if (carvingLine.positionCount == 0) {
             carvingLine.positionCount++;
-            carvingLine.SetPosition(0, Camera.main.ScreenToViewportPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
+            carvingLine.SetPosition(0, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
 
-        } else if (Vector3.Distance(Camera.main.ScreenToViewportPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)), carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints) {
+        } else if (Vector3.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)), carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints) {
             carvingLine.positionCount++;
-            carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToViewportPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
+            carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, Camera.main.nearClipPlane)));
         } else if (carvingLine.positionCount > 50) removeLine();
         
     }
