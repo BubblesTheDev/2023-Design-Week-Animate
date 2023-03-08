@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class runeCarver : MonoBehaviour {
     [Header("Graphics")]
     [SerializeField] private Image runeCircle;
-    [SerializeField] private GameObject runeBook;
-    [SerializeField] private List<GameObject> bookPages;
+    public Image runeTraceImage;
 
     [Header("Drawing Settings")]
     public LineRenderer carvingLine;
@@ -43,4 +42,6 @@ public class runeCarver : MonoBehaviour {
         } else if (carvingLine.positionCount > 50) removeLine();
         
     }
+
+    
 }

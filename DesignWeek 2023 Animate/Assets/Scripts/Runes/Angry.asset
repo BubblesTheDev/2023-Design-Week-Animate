@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Angry
   m_EditorClassIdentifier: 
   runeType: 0
+  runeDescription: Write description for rune here
+  manaCost: 0
   personality: 3
   motivation: 0
   runeJob: 0
