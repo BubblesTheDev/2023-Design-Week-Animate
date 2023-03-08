@@ -20,6 +20,12 @@ public class runeCarver : MonoBehaviour {
     [SerializeField] private runeTypes currentRuneToCarve;
     [SerializeField] private float errorDistance;
 
+    [Header("General Settings")]
+    public runeDataContainer currentSelectedPersonality;
+    public runeDataContainer currentSelectedMotivation;
+    public runeDataContainer currentSelectedJob;
+    public bool drawnPersonality, drawnMotivation, drawnJob;
+
     private void Update() {
         if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1)) {
             carveRune();
@@ -50,12 +56,6 @@ public class runeCarver : MonoBehaviour {
 
     void runeInformation()
     {
-        if (runeSelected != null)
-        {
-            runeNameText.text = runeSelected.name + " Rune";
-            runeDescription.text = runeSelected.runeDescription;
-            runeExampleImage.sprite = runeSelected.runeAsset;
-        }
     }
 
     
