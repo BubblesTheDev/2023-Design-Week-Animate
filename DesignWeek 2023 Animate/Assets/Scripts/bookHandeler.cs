@@ -57,6 +57,7 @@ public class bookHandeler : MonoBehaviour {
     public void selectRune() {
         GameObject thingCalling = EventSystem.current.currentSelectedGameObject;
         if (runePageData[currentRunePageIndex].runes.Contains(runePageData[currentRunePageIndex].runes.Where(runeDataContainer => runeDataContainer.name == new string(thingCalling.name.Replace("Rune Button ", ""))).SingleOrDefault())) {
+            
             carverScript.runeSelected = runePageData[currentRunePageIndex].runes.Where(runeDataContainer => runeDataContainer.name == new string(thingCalling.name.Replace("Rune Button ", ""))).FirstOrDefault();
             carverScript.runeTraceImage.sprite = carverScript.runeSelected.runeAsset;
 
@@ -126,7 +127,7 @@ public class bookHandeler : MonoBehaviour {
             bookObject.transform.Translate((bookObject.transform.parent.transform.position - bookObject.transform.position) * Time.deltaTime * bookMoveSpeed);
 
             bookObject.transform.localScale = Vector3.Lerp(bookObject.transform.localScale, Vector3.one * 2f, Time.deltaTime * bookMoveSpeed);
-            if (bookObject.GetComponent<RectTransform>().localPosition.x < 0.2f)
+            if (bookObject.GetComponent<RectTransform>().localPosition.x < 10f)
             {
                 bookObject.transform.position = bookObject.transform.parent.transform.position;
                 break;

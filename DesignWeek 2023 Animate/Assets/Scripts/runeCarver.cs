@@ -24,7 +24,7 @@ public class runeCarver : MonoBehaviour
     public runeDataContainer currentSelectedMotivation;
     public runeDataContainer currentSelectedJob;
     private bool isInCarveBox;
-    [HideInInspector] public bool bookIsOpen;
+    public bool bookIsOpen;
     [SerializeField] private bookHandeler handeler;
 
     [Space, Header("Rune Completion Settings")]
@@ -65,7 +65,7 @@ public class runeCarver : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyUp(KeyCode.Mouse1))
         {
-            if (isInCarveBox && !bookIsOpen) removeLine();
+            if (!bookIsOpen && carvingLine.positionCount >0) removeLine();
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && runeSelected != null)
@@ -127,10 +127,10 @@ public class runeCarver : MonoBehaviour
     {
         int numOfCorrect = 0;
         int lastCorrectPointIndex = 0;
-
+        if (carvingLine.positionCount <= 2) return;
         if (Vector3.Distance(runeSelected.linePlaces[0], carvingLine.GetPosition(0)) < Vector3.Distance(runeSelected.linePlaces[runeSelected.linePlaces.Count - 1], carvingLine.GetPosition(0)))
         {
-            for (int i = 0; i < runeSelected.linePlaces.Count - 1;)
+            for (int i = 0; i < runeSelected.linePlaces.Count - 1; )
             {
                 for (int x = 0 + lastCorrectPointIndex; x < carvingLine.positionCount - 1; x++)
                 {
@@ -142,14 +142,15 @@ public class runeCarver : MonoBehaviour
                         //print("Correct at index: " + x + " of the line renderer, This is the " + i + "th Correct point of the rune");
                         break;
                     }
-
-                    if (x == carvingLine.positionCount - 2)
+                    
+                    if (x >= carvingLine.positionCount - 2)
                     {
+                        i = runeSelected.linePlaces.Count;
                         return;
                     }
-
+                    
                 }
-
+                
 
             }
         }
@@ -169,7 +170,7 @@ public class runeCarver : MonoBehaviour
                         break;
                     }
 
-                    if (x == carvingLine.positionCount - 2)
+                    if (x >= carvingLine.positionCount - 2)
                     {
                         return;
                     }
@@ -283,13 +284,10 @@ public class runeCarver : MonoBehaviour
         runeSelected = null;
         runeTraceImage.sprite = null;
 
-        yield return new WaitForSeconds(0.5f);
-        handeler.bookObject.transform.parent.transform.Find("Open Book").GetComponent<Button>().onClick.Invoke();
+        if (drawnPersonality && drawnMotivation && drawnJob) {
+            handeler.bookObject.transform.parent.transform.Find("Open Book").GetComponent<Button>().onClick.Invoke();
 
-
-        if (drawnPersonality && drawnMotivation && drawnJob)
-        {
-            yield return new WaitForSeconds(3.5f);
+            yield return new WaitForSeconds(4.5f);
 
             handeler.bookObject.transform.Find("HiddenPage").gameObject.SetActive(true);
             handeler.bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
@@ -301,7 +299,35 @@ public class runeCarver : MonoBehaviour
             handeler.bookObject.transform.Find("HiddenPage/RuneHolder/Motivation Rune Img").GetComponent<Image>().sprite = currentSelectedMotivation.runeAsset;
             handeler.bookObject.transform.Find("HiddenPage/RuneHolder/Job Rune Img").GetComponent<Image>().sprite = currentSelectedJob.runeAsset;
             yield return null;
+        } else switch (runeToSpawn.runeType) {
+            case runeTypes.personality:
+            if (currentSelectedMotivation != null && !drawnMotivation) runeSelected = currentSelectedMotivation;
+            else if (currentSelectedJob != null && !drawnJob) runeSelected = currentSelectedJob;
+            else { 
+                yield return new WaitForSeconds(1.5f);
+                handeler.bookObject.transform.parent.transform.Find("Open Book").GetComponent<Button>().onClick.Invoke(); 
+            }
+            break;
+            case runeTypes.motivation:
+            if (currentSelectedJob != null && !drawnJob) runeSelected = currentSelectedJob;
+            else if (currentSelectedPersonality != null && !drawnPersonality) runeSelected = currentSelectedPersonality;
+            else {
+                yield return new WaitForSeconds(1.5f);
+                handeler.bookObject.transform.parent.transform.Find("Open Book").GetComponent<Button>().onClick.Invoke();
+            }
+            break;
+            case runeTypes.job:
+            if (currentSelectedPersonality != null && !drawnPersonality) runeSelected = currentSelectedPersonality;
+            else if (currentSelectedMotivation != null && !drawnMotivation) runeSelected = currentSelectedMotivation;
+            else {
+                yield return new WaitForSeconds(1.5f);
+                handeler.bookObject.transform.parent.transform.Find("Open Book").GetComponent<Button>().onClick.Invoke();
+            }
+            break;
         }
+        if(runeSelected != null) runeTraceImage.sprite = runeSelected.runeAsset;
+
+        
 
         switch (runeToSpawn.runeType)
         {
