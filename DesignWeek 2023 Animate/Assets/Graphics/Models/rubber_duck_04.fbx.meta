@@ -3,7 +3,22 @@ guid: 0a8484ff73eb24d41a3e052048741ffa
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: duck_body1
+    second: {fileID: 2100000, guid: 7c59479d3f5401944ae247e3aacfb1c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: duck_mouth1
+    second: {fileID: 2100000, guid: a516b724ff9537c459f5dcd0ee37892e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: duck_wings1
+    second: {fileID: 2100000, guid: db8c3b3a82d6ced4ab68de36576b4ad2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

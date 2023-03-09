@@ -3,7 +3,37 @@ guid: a6d4ae247e4f00943ad45bc79ff09285
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lamp_head
+    second: {fileID: 2100000, guid: eb946f0a916700943b553d823f9c5081, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light_bulb
+    second: {fileID: 2100000, guid: db8c3b3a82d6ced4ab68de36576b4ad2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: part1
+    second: {fileID: 2100000, guid: a516b724ff9537c459f5dcd0ee37892e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: part2
+    second: {fileID: 2100000, guid: a516b724ff9537c459f5dcd0ee37892e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: part3
+    second: {fileID: 2100000, guid: eb946f0a916700943b553d823f9c5081, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wire
+    second: {fileID: 2100000, guid: eb946f0a916700943b553d823f9c5081, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

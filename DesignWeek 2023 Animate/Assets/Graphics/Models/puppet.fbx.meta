@@ -3,7 +3,57 @@ guid: 68a4925a6e5bca5498c1d0c0bd2cecea
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_arms
+    second: {fileID: 2100000, guid: 1ab16b0914cfb6b4c9d5a94ae7137287, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_body
+    second: {fileID: 2100000, guid: 5c22c27d32980e54789a81614f8883c9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_hair
+    second: {fileID: 2100000, guid: a516b724ff9537c459f5dcd0ee37892e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_hat
+    second: {fileID: 2100000, guid: eb946f0a916700943b553d823f9c5081, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_head
+    second: {fileID: 2100000, guid: 942168813579e1543a5be6f5d803c2f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_legs
+    second: {fileID: 2100000, guid: 1ab16b0914cfb6b4c9d5a94ae7137287, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_mouth
+    second: {fileID: 2100000, guid: 8020c5c1552bd2d49840c72d95f10c20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_nose
+    second: {fileID: 2100000, guid: 3b21e7a7e38d938478bbc2c71a7abe75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_part
+    second: {fileID: 2100000, guid: 1ab16b0914cfb6b4c9d5a94ae7137287, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: puppet_string
+    second: {fileID: 2100000, guid: db8c3b3a82d6ced4ab68de36576b4ad2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
