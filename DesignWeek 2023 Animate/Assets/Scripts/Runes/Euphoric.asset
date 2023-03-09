@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: Euphoric
   m_EditorClassIdentifier: 
   runeType: 1
+  runeDescription: 
   personality: 0
   motivation: 1
   runeJob: 0
-  runeAsset: {fileID: 21300000, guid: 4080c42d698b5234dbe66c83e6190bc5, type: 3}
-  linePlaces: []
+  runeAsset: {fileID: 21300000, guid: 6fd41f29e369413438e86d5f3d6653cf, type: 3}
+  linePlaces:
+  - {x: -0.030866481, y: 1.2408472, z: 4.95}
+  - {x: -0.006173236, y: 0.5988168, z: 4.95}
+  - {x: -0.018519707, y: -0.7469775, z: 4.95}
+  - {x: 0.9321789, y: -0.043213498, z: 4.95}
+  - {x: -0.018519707, y: 0.6111636, z: 4.95}
+  - {x: -0.9445253, y: -0.043213498, z: 4.95}
+  - {x: 0.27780196, y: -1.1667666, z: 4.95}
