@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Happy
   m_EditorClassIdentifier: 
   runeType: 0
+  runeDescription: 
   personality: 1
   motivation: 0
   runeJob: 0
   runeAsset: {fileID: 21300000, guid: 453a251e7c64ab74e80f216371d26746, type: 3}
-  linePlaces: []
+  linePlaces:
+  - {x: 0.018864026, y: 1.1695628, z: 4.95}
+  - {x: 0.02829604, y: -1.0846751, z: 4.95}
+  - {x: -1.1224029, y: 0.06602364, z: 4.95}
+  - {x: 1.1224036, y: 0.0188638, z: 4.95}
+  - {x: 0.63194185, y: 0.64137334, z: 4.95}

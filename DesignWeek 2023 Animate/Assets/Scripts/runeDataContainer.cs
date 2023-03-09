@@ -12,7 +12,7 @@ public class runeDataContainer : ScriptableObject
     public motivationLevels motivation;
     public jobs runeJob;
     public Sprite runeAsset;
-    public List<GameObject> linePlaces;
+    public List<Vector3> linePlaces;
 }
 
 public enum runeTypes {
