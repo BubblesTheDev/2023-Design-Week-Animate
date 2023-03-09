@@ -8,11 +8,11 @@ using System.Linq;
 public class bookHandeler : MonoBehaviour {
     [Header("Scripting Data")]
     [SerializeField] private List<runePageContainer> runePageData;
-    [SerializeField] private int currentRunePageIndex;
+    public int currentRunePageIndex;
     [SerializeField] private runeCarver carverScript;
 
     [Space, Header("Graphic Data")]
-    [SerializeField] private GameObject bookObject;
+    public GameObject bookObject;
     [SerializeField] private GameObject properRightPage;
     [SerializeField] private GameObject runeSelectorPrefab;
     [SerializeField] private List<GameObject> pages;
@@ -48,7 +48,8 @@ public class bookHandeler : MonoBehaviour {
         }
         bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
         bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
-        properRightPage.SetActive(false);
+        bookObject.transform.Find("RightPage").gameObject.SetActive(false);
+        bookObject.transform.Find("HiddenPage").gameObject.SetActive(false);
 
         bookObject.SetActive(false);
     }
@@ -139,7 +140,7 @@ public class bookHandeler : MonoBehaviour {
     }
 
     public IEnumerator disableBook() {
-        properRightPage.SetActive(false);
+        bookObject.transform.Find("RightPage").gameObject.SetActive(false);
         bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
         bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
 
@@ -161,4 +162,17 @@ public class bookHandeler : MonoBehaviour {
         bookObject.SetActive(false);
 
     }
+
+    public void enableObjectAfterTimeWrapper(string timeToEnable)
+    {
+        StartCoroutine(enableObjectAfterTime(GameObject.Find(timeToEnable.Split("/").FirstOrDefault()).transform.Find(timeToEnable.Split("/").ElementAt(1)).gameObject, float.Parse(timeToEnable.Split("/").Last())));
+    }
+
+    public IEnumerator enableObjectAfterTime(GameObject objToEnable, float timeToEnable)
+    {
+        yield return new WaitForSeconds(timeToEnable);
+        objToEnable.SetActive(true);
+    }
+
+    
 }
