@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Normie
   m_EditorClassIdentifier: 
   runeType: 1
-  runeDescription: Normie Description
+  runeDescription: Feeling perfectly average.
   personality: 0
   motivation: 2
   runeJob: 0

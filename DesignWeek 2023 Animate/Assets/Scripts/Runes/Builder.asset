@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Builder
   m_EditorClassIdentifier: 
   runeType: 2
-  runeDescription: Builder  Description
+  runeDescription: This place could use more buildings. I'm gonna make them.
   personality: 0
   motivation: 0
   runeJob: 1

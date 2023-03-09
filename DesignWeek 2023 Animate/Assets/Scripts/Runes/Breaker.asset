@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Breaker
   m_EditorClassIdentifier: 
   runeType: 2
-  runeDescription: Breaker Description
+  runeDescription: If I see a building, I'm gonna break it.
   personality: 0
   motivation: 0
   runeJob: 2

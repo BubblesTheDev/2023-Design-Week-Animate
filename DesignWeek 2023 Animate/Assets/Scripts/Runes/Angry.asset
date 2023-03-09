@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Angry
   m_EditorClassIdentifier: 
   runeType: 0
-  runeDescription: Angry Description
+  runeDescription: I want to scream, but I have no mouth.
   personality: 3
   motivation: 0
   runeJob: 0
