@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeType: 0
   runeDescription: Write description for rune here
-  manaCost: 0
   personality: 3
   motivation: 0
   runeJob: 0
   runeAsset: {fileID: 21300000, guid: ff59e2f2f3464454994d925caf0d2152, type: 3}
-  linePlaces: []
+  linePlaces:
+  - {x: -1.1583781, y: 1.1117207, z: 4.95}
+  - {x: -1.1790633, y: -1.183685, z: 4.95}
+  - {x: 0.062056143, y: 1.0496827, z: 4.95}
+  - {x: 0.062056143, y: -1.0802885, z: 4.95}
+  - {x: 1.0652941, y: -1.0802885, z: 4.95}

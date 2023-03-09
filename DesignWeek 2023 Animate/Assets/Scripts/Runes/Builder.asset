@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: Builder
   m_EditorClassIdentifier: 
   runeType: 2
+  runeDescription: 
   personality: 0
   motivation: 0
   runeJob: 1
   runeAsset: {fileID: 21300000, guid: 7a17ba766b9f513498d11c766057d9ee, type: 3}
-  linePlaces: []
+  linePlaces:
+  - {x: 0.3693018, y: 0.4663246, z: 4.95}
+  - {x: 1.0457455, y: 1.1241493, z: 4.95}
+  - {x: 1.0274637, y: -1.141692, z: 4.95}
+  - {x: -0.14260179, y: -0.24631926, z: 4.95}
+  - {x: -1.0567151, y: -1.0868732, z: 4.95}
