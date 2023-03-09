@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Euphoric
   m_EditorClassIdentifier: 
   runeType: 1
-  runeDescription: Euphoric  Description
+  runeDescription: What a time to be alive!
   personality: 0
   motivation: 1
   runeJob: 0

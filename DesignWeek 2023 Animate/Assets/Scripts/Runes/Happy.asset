@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Happy
   m_EditorClassIdentifier: 
   runeType: 0
-  runeDescription: Happy Description
+  runeDescription: Hello world!
   personality: 1
   motivation: 0
   runeJob: 0
