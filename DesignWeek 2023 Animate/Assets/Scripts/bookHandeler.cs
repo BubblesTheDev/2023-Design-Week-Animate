@@ -125,7 +125,7 @@ public class bookHandeler : MonoBehaviour {
             bookObject.transform.Translate((bookObject.transform.parent.transform.position - bookObject.transform.position) * Time.deltaTime * bookMoveSpeed);
 
             bookObject.transform.localScale = Vector3.Lerp(bookObject.transform.localScale, Vector3.one * 2f, Time.deltaTime * bookMoveSpeed);
-            if (bookObject.GetComponent<RectTransform>().localPosition.x < 0.015f)
+            if (bookObject.GetComponent<RectTransform>().localPosition.x < 0.2f)
             {
                 bookObject.transform.position = bookObject.transform.parent.transform.position;
                 break;
