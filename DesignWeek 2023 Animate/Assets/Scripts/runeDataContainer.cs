@@ -15,11 +15,13 @@ public class runeDataContainer : ScriptableObject
     public List<Vector3> linePlaces;
 }
 
+[System.Serializable]
 public enum runeTypes {
     personality,
     motivation,
     job
 }
+[System.Serializable]
 
 public enum personalityTypes {
     None,
@@ -27,6 +29,7 @@ public enum personalityTypes {
     Sad,
     Angry
 }
+[System.Serializable]
 
 public enum motivationLevels{
     None,
@@ -34,6 +37,7 @@ public enum motivationLevels{
     Moderate,
     Low
 }
+[System.Serializable]
 
 public enum jobs {
     None,
@@ -70,6 +74,12 @@ public class runeDataEditor : Editor
         }
         EditorGUILayout.PropertyField(m_runeAssetSprite,new GUIContent("Rune Asset Sprite: "));
         EditorGUILayout.PropertyField(m_linePlaces, new GUIContent("Rune line Points: "));
+        EditorGUILayout.Space(20f);
+        if (GUILayout.Button("Save")) {
+            EditorUtility.SetDirty(container);
+            AssetDatabase.SaveAssets();
+        }
         serializedObject.ApplyModifiedProperties();
+        
     }
 }

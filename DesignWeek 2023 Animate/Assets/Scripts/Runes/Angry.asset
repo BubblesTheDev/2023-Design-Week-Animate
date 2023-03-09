@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Angry
   m_EditorClassIdentifier: 
   runeType: 0
-  runeDescription: Write description for rune here
+  runeDescription: Angry Description
   personality: 3
   motivation: 0
   runeJob: 0
   runeAsset: {fileID: 21300000, guid: ff59e2f2f3464454994d925caf0d2152, type: 3}
   linePlaces:
-  - {x: 1.1188749, y: 1.0876032, z: 4.95}
-  - {x: -1.1846907, y: 1.142422, z: 4.95}
-  - {x: -1.202973, y: -1.1782378, z: 4.95}
-  - {x: 0.09506765, y: 1.0510573, z: 4.95}
-  - {x: 0.13163237, y: -1.0320545, z: 4.95}
-  - {x: 1.1005925, y: -1.0320545, z: 4.95}
+  - {x: 1.0006989, y: -1.061347, z: 4.95}
+  - {x: 0.10475635, y: -1.0475632, z: 4.95}
+  - {x: 0.11854005, y: 1.0889145, z: 4.95}
+  - {x: -1.1219952, y: -1.0751307, z: 4.95}
+  - {x: -1.1495627, y: 1.0751307, z: 4.95}
+  - {x: 0.090972625, y: 1.0889145, z: 4.95}
+  - {x: 1.097185, y: 1.0889145, z: 4.95}

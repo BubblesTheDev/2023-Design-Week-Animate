@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Builder
   m_EditorClassIdentifier: 
   runeType: 2
-  runeDescription: 
+  runeDescription: Builder  Description
   personality: 0
   motivation: 0
   runeJob: 1
   runeAsset: {fileID: 21300000, guid: 7a17ba766b9f513498d11c766057d9ee, type: 3}
   linePlaces:
-  - {x: -0.9470213, y: 0.5028703, z: 4.95}
-  - {x: 0.3327371, y: 0.4663246, z: 4.95}
-  - {x: 0.97261655, y: 1.1972408, z: 4.95}
-  - {x: 1.0457455, y: -1.141692, z: 4.95}
-  - {x: -0.08775502, y: -0.24631926, z: 4.95}
-  - {x: -0.98358595, y: -1.0686003, z: 4.95}
+  - {x: -0.9565905, y: 0.50999784, z: 4.95}
+  - {x: 0.35286376, y: 0.52378166, z: 4.95}
+  - {x: 0.9731314, y: 1.1164821, z: 4.95}
+  - {x: 1.0006989, y: -1.0889143, z: 4.95}
+  - {x: -0.12956709, y: -0.2756745, z: 4.95}
+  - {x: -0.9841578, y: -1.0751307, z: 4.95}
