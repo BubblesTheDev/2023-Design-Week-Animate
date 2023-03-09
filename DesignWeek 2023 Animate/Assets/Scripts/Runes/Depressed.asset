@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Depressed
   m_EditorClassIdentifier: 
   runeType: 1
-  runeDescription: Depressed  Description
+  runeDescription: I don't wanna be here.
   personality: 0
   motivation: 3
   runeJob: 0

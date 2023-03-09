@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sad
   m_EditorClassIdentifier: 
   runeType: 0
-  runeDescription: Sad Description
+  runeDescription: Born to cry.
   personality: 2
   motivation: 0
   runeJob: 0
