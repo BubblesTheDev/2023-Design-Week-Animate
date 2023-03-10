@@ -60,7 +60,9 @@ public class placerAi : MonoBehaviour
 
         print("play build animation");
         yield return new WaitForSeconds(4f);
-        Instantiate(buildingsToPlace[Random.Range(0, buildingsToPlace.Count+1)], transform.position + (transform.forward * 1f), Quaternion.identity, GameObject.Find("PlacedObjects").transform);
+        RaycastHit hit;
+        Physics.Raycast(transform.position + (transform.forward + transform.up * 5f) * 1f, Vector3.down, out hit);
+        Instantiate(buildingsToPlace[Random.Range(0, buildingsToPlace.Count + 1)], hit.point, Quaternion.identity, GameObject.Find("PlacedObjects").transform);
         currentbuildings++;
 
         float randomTimeToWait = Random.Range(soul.minTimeBetweenChoice, soul.maxTimeBetweenChoice);
