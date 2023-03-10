@@ -8,11 +8,14 @@ public class runeDataContainer : ScriptableObject
     public runeTypes runeType;
     public string runeDescription;
 
-    public personalityTypes personality;
-    public motivationLevels motivation;
-    public jobs runeJob;
     public Sprite runeAsset;
-    public List<Vector3> linePlaces;
+    public GameObject linePlacesHolder;
+
+    public float minTimeBetweenActions = 3f, maxTimeBetweenActions = 5f;
+    public float sightRadius = 1f;
+    public float moveSpeed = 1f;
+    public List<GameObject> buildingsToPlace;
+    public List<string> stringsToAttack;
 }
 
 [System.Serializable]
@@ -20,29 +23,6 @@ public enum runeTypes {
     personality,
     motivation,
     job
-}
-[System.Serializable]
-
-public enum personalityTypes {
-    None,
-    Happy,
-    Sad,
-    Angry
-}
-[System.Serializable]
-
-public enum motivationLevels{
-    None,
-    High,
-    Moderate,
-    Low
-}
-[System.Serializable]
-
-public enum jobs {
-    None,
-    Builder,
-    Breaker
 }
 
 [CustomEditor(typeof(runeDataContainer))]
@@ -53,27 +33,32 @@ public class runeDataEditor : Editor
         runeDataContainer container = (runeDataContainer)target;
 
         SerializedProperty m_runeAssetSprite = serializedObject.FindProperty("runeAsset");
-        SerializedProperty m_linePlaces = serializedObject.FindProperty("linePlaces");
+        SerializedProperty m_buildingsToPlace = serializedObject.FindProperty("buildingsToPlace");
+        SerializedProperty m_stringsToAttack = serializedObject.FindProperty("stringsToAttack");
 
         container.runeType = (runeTypes)EditorGUILayout.EnumPopup("Rune Type: ", container.runeType);
         EditorGUILayout.LabelField("Rune Description: ");
         container.runeDescription = EditorGUILayout.TextArea(container.runeDescription, GUILayout.Height(50));
 
-        EditorGUILayout.Space(20);
         switch (container.runeType)
         {
             case runeTypes.job:
-                container.runeJob = (jobs)EditorGUILayout.EnumPopup("Item's Job: ", container.runeJob);
+                EditorGUILayout.PropertyField(m_buildingsToPlace, new GUIContent("Buildings To Place: "));
+                EditorGUILayout.PropertyField(m_stringsToAttack, new GUIContent("Names Of Objects To Attack: "));
                 break;
             case runeTypes.motivation:
-                container.motivation = (motivationLevels)EditorGUILayout.EnumPopup("Motivation Level: ", container.motivation);
+                container.minTimeBetweenActions = EditorGUILayout.FloatField("Min Time Between Actions: ", container.minTimeBetweenActions);
+                container.maxTimeBetweenActions = EditorGUILayout.FloatField("Max Time Between Actions: ", container.maxTimeBetweenActions);
                 break;
             case runeTypes.personality:
-                container.personality = (personalityTypes)EditorGUILayout.EnumPopup("Object's Personality: ", container.personality);
+                container.moveSpeed = EditorGUILayout.FloatField("Move Speed Modifier: ", container.moveSpeed);
+                container.sightRadius = EditorGUILayout.FloatField("Sight Radius Modifier: ", container.sightRadius);
                 break;
         }
+
+        EditorGUILayout.Space(20);
         EditorGUILayout.PropertyField(m_runeAssetSprite,new GUIContent("Rune Asset Sprite: "));
-        EditorGUILayout.PropertyField(m_linePlaces, new GUIContent("Rune line Points: "));
+        container.linePlacesHolder = (GameObject)EditorGUILayout.ObjectField("Line Place Holder: ", container.linePlacesHolder, typeof(GameObject));
         EditorGUILayout.Space(20f);
         if (GUILayout.Button("Save")) {
             EditorUtility.SetDirty(container);

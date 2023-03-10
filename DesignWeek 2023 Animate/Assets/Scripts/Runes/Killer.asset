@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d156281c7aefa1448f85b77b71c9c26, type: 3}
-  m_Name: Murderer
+  m_Name: Killer
   m_EditorClassIdentifier: 
   runeType: 2
   runeDescription: I'm gonna unanimate these objects using blunt force.
-  personality: 0
-  motivation: 0
-  runeJob: 0
   runeAsset: {fileID: 21300000, guid: 9fbcbd8e551162c46b0cfd65aa04763b, type: 3}
-  linePlaces: []
+  linePlacesHolder: {fileID: 8600912518776171446, guid: 90ac619867ed2774fbf8c7e9d2bc6a43,
+    type: 3}
+  minTimeBetweenActions: 3
+  maxTimeBetweenActions: 5
+  sightRadius: 1
+  moveSpeed: 1
+  buildingsToPlace: []
+  stringsToAttack: []

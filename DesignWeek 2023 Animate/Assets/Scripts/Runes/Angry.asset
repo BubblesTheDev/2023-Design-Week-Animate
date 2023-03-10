@@ -14,14 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeType: 0
   runeDescription: I want to scream, but I have no mouth.
-  personality: 3
-  motivation: 0
-  runeJob: 0
   runeAsset: {fileID: 21300000, guid: ff59e2f2f3464454994d925caf0d2152, type: 3}
-  linePlaces:
-  - {x: 1.0006989, y: -1.061347, z: 4.95}
-  - {x: 0.1, y: -1.0475632, z: 4.95}
-  - {x: 0.11854005, y: 1.0889145, z: 4.95}
-  - {x: -1.1219952, y: -1.0751307, z: 4.95}
-  - {x: -1.1495627, y: 1.0751307, z: 4.95}
-  - {x: 1.14, y: 1.0889145, z: 4.95}
+  linePlacesHolder: {fileID: 213426662806591579, guid: 0239f66843f0c8c458e56dd9db804a1d,
+    type: 3}
+  minTimeBetweenActions: 0
+  maxTimeBetweenActions: 0
+  sightRadius: 1
+  moveSpeed: 1
+  buildingsToPlace: []
+  stringsToAttack: []

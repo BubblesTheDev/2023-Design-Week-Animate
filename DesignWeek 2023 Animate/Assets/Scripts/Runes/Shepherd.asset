@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeType: 2
   runeDescription: I've always wanted to work with wool.
-  personality: 0
-  motivation: 0
-  runeJob: 0
   runeAsset: {fileID: 21300000, guid: 836a479e9c357d644903810423d21e55, type: 3}
-  linePlaces: []
+  linePlacesHolder: {fileID: 8778786421111693448, guid: 35bc9f5fd82b26347bebdf26acd6fa07,
+    type: 3}
+  minTimeBetweenActions: 3
+  maxTimeBetweenActions: 5
+  sightRadius: 1
+  moveSpeed: 1
+  buildingsToPlace: []
+  stringsToAttack: []

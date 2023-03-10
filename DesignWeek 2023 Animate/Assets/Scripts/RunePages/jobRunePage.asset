@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: jobRunePage
   m_EditorClassIdentifier: 
   runes:
-  - {fileID: 11400000, guid: 30bfb4d6449a2804c92ddf46614a6dd2, type: 2}
   - {fileID: 11400000, guid: 849290cc50efb9a46805c7fd989041aa, type: 2}
+  - {fileID: 11400000, guid: 0c5ff953d56cc164ab89e3b710c9f726, type: 2}
+  - {fileID: 11400000, guid: a867b2afc5237334a8793ad9b5d26c00, type: 2}
   pageStorageType: 2

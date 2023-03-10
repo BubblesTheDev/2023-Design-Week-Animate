@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor;
+using UnityEngine.AI;
 
 public class runeCarver : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class runeCarver : MonoBehaviour
     public LineRenderer carvingLine;
     public GameObject objToCarve;
     public runeDataContainer runeSelected;
-    [SerializeField] private Vector3 boundCorner1, boundCorner2;
+    [SerializeField] private GameObject boundRect;
     [SerializeField] private float maxDistanceBetweenPoints, maxNumOfPoints;
     [SerializeField] private float errorDistance;
     [SerializeField] private float screenDepthValue;
@@ -23,7 +25,7 @@ public class runeCarver : MonoBehaviour
     public runeDataContainer currentSelectedPersonality;
     public runeDataContainer currentSelectedMotivation;
     public runeDataContainer currentSelectedJob;
-    private bool isInCarveBox;
+    [SerializeField] private bool isInCarveBox;
     public bool bookIsOpen;
     [SerializeField] private bookHandeler handeler;
 
@@ -31,7 +33,6 @@ public class runeCarver : MonoBehaviour
     [SerializeField] private float numOfAfterRunes;
     [SerializeField] private float distanceToRing;
     public bool drawnPersonality, drawnMotivation, drawnJob;
-
 
     private void Update()
     {
@@ -71,10 +72,14 @@ public class runeCarver : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && runeSelected != null)
         {
             Vector3 screenPos = Input.mousePosition;
-            screenPos.z = screenDepthValue;
-            runeSelected.linePlaces.Add(Camera.main.ScreenToWorldPoint(screenPos));
-            print("Adding line place to " + runeSelected + "'s Line places at index " + (runeSelected.linePlaces.Count - 1));
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(boundRect.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out screenPos);
+
+            GameObject temp = new GameObject("Place(" + GameObject.Find("Bound Rect").transform.Find(runeSelected.name + " RunePlaceMents").childCount.ToString() + ")");
+            temp.transform.parent = GameObject.Find("Bound Rect").transform.Find(runeSelected.name + " RunePlaceMents");
+            temp.transform.position = screenPos;
+            print("Adding line place to " + runeSelected + "'s Line places at index " + (runeSelected.linePlacesHolder.transform.childCount - 1));
         }
+
     }
 
     public void changeBookState(bool stateToSet)
@@ -84,14 +89,8 @@ public class runeCarver : MonoBehaviour
 
     void detectBounds()
     {
-        Vector3 screenPos = Input.mousePosition;
-        screenPos.z = screenDepthValue;
-
-        if (Camera.main.ScreenToWorldPoint(screenPos).x > boundCorner1.x + carvingLine.startWidth / 2
-            && Camera.main.ScreenToWorldPoint(screenPos).x < boundCorner2.x - carvingLine.startWidth / 2
-            && Camera.main.ScreenToWorldPoint(screenPos).y < boundCorner1.y - carvingLine.startWidth / 2
-            && Camera.main.ScreenToWorldPoint(screenPos).y > boundCorner2.y + carvingLine.startWidth / 2) isInCarveBox = true;
-        else isInCarveBox = false;
+        Vector3 screenPos = Vector3.zero;
+        isInCarveBox = RectTransformUtility.RectangleContainsScreenPoint(boundRect.GetComponent<RectTransform>(), Input.mousePosition, Camera.main);
     }
 
     void removeLine()
@@ -103,20 +102,22 @@ public class runeCarver : MonoBehaviour
     void carveRune()
     {
         Vector3 screenPos = Input.mousePosition;
-        screenPos.z = screenDepthValue;
 
         if (isInCarveBox)
         {
+
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(boundRect.GetComponent<RectTransform>(), Input.mousePosition, Camera.main, out screenPos);
             if (carvingLine.positionCount == 0)
             {
                 carvingLine.positionCount++;
-                carvingLine.SetPosition(0, Camera.main.ScreenToWorldPoint(screenPos));
+
+                carvingLine.SetPosition(0, screenPos);
 
             }
-            else if (Vector3.Distance(Camera.main.ScreenToWorldPoint(screenPos), carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints)
+            else if (Vector3.Distance(screenPos, carvingLine.GetPosition(carvingLine.positionCount - 1)) >= maxDistanceBetweenPoints)
             {
                 carvingLine.positionCount++;
-                carvingLine.SetPosition(carvingLine.positionCount - 1, Camera.main.ScreenToWorldPoint(screenPos));
+                carvingLine.SetPosition(carvingLine.positionCount - 1, screenPos);
             }
             else if (carvingLine.positionCount > maxNumOfPoints) removeLine();
         }
@@ -127,25 +128,26 @@ public class runeCarver : MonoBehaviour
     {
         int numOfCorrect = 0;
         int lastCorrectPointIndex = 0;
+        GameObject tempHolder = GameObject.Find(runeSelected.linePlacesHolder.name).gameObject;
+
         if (carvingLine.positionCount <= 2) return;
-        if (Vector3.Distance(runeSelected.linePlaces[0], carvingLine.GetPosition(0)) < Vector3.Distance(runeSelected.linePlaces[runeSelected.linePlaces.Count - 1], carvingLine.GetPosition(0)))
+        if (Vector3.Distance(tempHolder.transform.GetChild(0).transform.position, carvingLine.GetPosition(0))
+            < Vector3.Distance(tempHolder.transform.GetChild(tempHolder.transform.childCount - 1).position, carvingLine.GetPosition(0)))
         {
-            for (int i = 0; i < runeSelected.linePlaces.Count - 1; )
+            for (int i = 0; i < tempHolder.transform.childCount-1;)
             {
                 for (int x = 0 + lastCorrectPointIndex; x < carvingLine.positionCount - 1; x++)
                 {
-                    if (Vector3.Distance(carvingLine.GetPosition(x), runeSelected.linePlaces[i]) < errorDistance)
+                    if (Vector3.Distance(carvingLine.GetPosition(x), tempHolder.transform.GetChild(i).position) < errorDistance)
                     {
                         lastCorrectPointIndex = x;
                         i++;
                         numOfCorrect++;
-                        //print("Correct at index: " + x + " of the line renderer, This is the " + i + "th Correct point of the rune");
                         break;
                     }
                     
-                    if (x >= carvingLine.positionCount - 2)
+                    if (x == carvingLine.positionCount - 2)
                     {
-                        i = runeSelected.linePlaces.Count;
                         return;
                     }
                     
@@ -156,17 +158,17 @@ public class runeCarver : MonoBehaviour
         }
         else
         {
-            for (int i = runeSelected.linePlaces.Count - 1; i > 0;)
+
+            for (int i = tempHolder.transform.childCount - 1; i > 0;)
             {
 
                 for (int x = 0 + lastCorrectPointIndex; x < carvingLine.positionCount - 1; x++)
                 {
-                    if (Vector3.Distance(carvingLine.GetPosition(x), runeSelected.linePlaces[i]) < errorDistance)
+                    if (Vector3.Distance(carvingLine.GetPosition(x), tempHolder.transform.GetChild(i).position) < errorDistance)
                     {
                         lastCorrectPointIndex = x;
                         i--;
                         numOfCorrect++;
-                        //print("Correct at index: " + x + " of the line renderer, This is the " + i + "th Correct point of the rune");
                         break;
                     }
 
@@ -181,8 +183,7 @@ public class runeCarver : MonoBehaviour
             }
         }
 
-
-        if (numOfCorrect == runeSelected.linePlaces.Count - 1)
+        if (numOfCorrect == tempHolder.transform.childCount-1)
         {
             switch (runeSelected.runeType)
             {
@@ -202,6 +203,7 @@ public class runeCarver : MonoBehaviour
 
             spawnCompletedRune(runeSelected);
             StartCoroutine(resetRune(runeSelected));
+            
         }
     }
 
@@ -245,8 +247,61 @@ public class runeCarver : MonoBehaviour
 
     }
 
+    public void applyRune()
+    {
+
+        objectSoul temp = objToCarve.GetComponent<objectSoul>();
+        temp.objPersonality = currentSelectedPersonality;
+        temp.objMotivation = currentSelectedMotivation;
+        temp.objJob = currentSelectedJob;
+        temp.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+
+
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(GameObject.Find("Game Manager").GetComponent<magicHandler>().originOfObject, out hit, 50f, objToCarve.GetComponent<NavMeshAgent>().areaMask);
+        objToCarve.GetComponent<NavMeshAgent>().Warp(hit.position + Vector3.up*0.1f);
+
+
+        for (int i = 0; i < temp.placerBasedAi.Count - 1; i++)
+        {
+            
+            if (temp.placerBasedAi[i].GetType().ToString() == temp.objJob.name + "JobAI")
+            {
+                temp.placerBasedAi[i].enabled = true;
+                temp.selectedPlacer = objToCarve.GetComponent<objectSoul>().placerBasedAi[i];
+                break;
+            }
+        }
+        for (int i = 0; i < temp.removerBasedAi.Count - 1; i++)
+        {
+            if (temp.removerBasedAi[i].GetType().ToString() == temp.objJob.name + "JobAI")
+            {
+                temp.removerBasedAi[i].enabled = true;
+                temp.selectedRemover = objToCarve.GetComponent<objectSoul>().removerBasedAi[i];
+                break;
+            }
+        }
+
+
+        temp.objMoveSpeed *= currentSelectedPersonality.moveSpeed;
+        temp.sightRadius *= currentSelectedPersonality.sightRadius;
+        temp.minTimeBetweenChoice = currentSelectedMotivation.minTimeBetweenActions;
+        temp.maxTimeBetweenChoice = currentSelectedMotivation.maxTimeBetweenActions;
+
+        if (temp.selectedPlacer)
+        {
+
+        }
+        else if (temp.selectedRemover)
+        {
+
+        }
+    }
+
     public void completeAnimate()
     {
+        applyRune();
         handeler.bookObject.transform.Find("RightPage").gameObject.SetActive(true);
         handeler.bookObject.transform.Find("LeftPage").gameObject.SetActive(true);
         handeler.bookObject.transform.Find("HiddenPage").gameObject.SetActive(false);
@@ -265,6 +320,8 @@ public class runeCarver : MonoBehaviour
             handeler.bookObject.transform.Find("RightPage/Selected Job Rune").GetComponent<Image>().sprite = null;
         }
 
+        
+
         handeler.currentRunePageIndex = 0;
         currentSelectedPersonality = null;
         currentSelectedMotivation = null;
@@ -277,6 +334,8 @@ public class runeCarver : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
+        GetComponent<magicHandler>().endCarve();
     }
 
     IEnumerator resetRune(runeDataContainer runeToSpawn)
@@ -325,11 +384,16 @@ public class runeCarver : MonoBehaviour
             }
             break;
         }
-        if(runeSelected != null) runeTraceImage.sprite = runeSelected.runeAsset;
+        if (runeSelected != null)
+        {
+            runeTraceImage.sprite = runeSelected.runeAsset;
+            if (GameObject.Find("Bound Rect").transform.childCount > 0) Destroy(GameObject.Find("Bound Rect").transform.GetChild(0).gameObject);
+            GameObject temp = Instantiate(runeSelected.linePlacesHolder, GameObject.Find("Bound Rect").transform);
+            temp.name = temp.name.Replace("(Clone)", "");
+        }
 
-        
 
-        switch (runeToSpawn.runeType)
+            switch (runeToSpawn.runeType)
         {
             case runeTypes.personality:
                 GameObject.Find("Canvas").transform.Find("Book/PageButtons/Page 1 Tab").gameObject.SetActive(false);
@@ -355,9 +419,14 @@ public class runeCarver : MonoBehaviour
     {
         if (runeSelected != null)
         {
-            foreach (Vector3 linePos in runeSelected.linePlaces)
+
+            
+
+            foreach (Transform item in runeSelected.linePlacesHolder.transform)
             {
-                Gizmos.DrawWireSphere(linePos, errorDistance);
+                
+
+                Gizmos.DrawWireSphere(item.position, errorDistance);
             }
         }
     }

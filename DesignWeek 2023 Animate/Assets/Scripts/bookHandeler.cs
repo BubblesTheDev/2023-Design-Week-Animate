@@ -21,37 +21,41 @@ public class bookHandeler : MonoBehaviour {
     [SerializeField] private List<Text> currentSelectedRunesText;
 
     [SerializeField] private GameObject startingPos;
-    private void Awake() {
+    private void OnEnable()
+    {
         createRunesForPages();
     }
 
     private void Update() {
 
-        if (Input.GetKeyDown(KeyCode.F1)) setPage(0);
-        if (Input.GetKeyDown(KeyCode.F2)) setPage(1);
-        if (Input.GetKeyDown(KeyCode.F3)) setPage(2);
 
 
         handlePageGraphics();
     }
 
     void createRunesForPages() {
-        for (int i = 0; i < runePageData.Count; i++) {
-            for (int x = 0; x < runePageData[i].runes.Count; x++) {
-                GameObject temp = Instantiate(runeSelectorPrefab, GameObject.Find("Content " + runePageData[i].name).transform.position, Quaternion.identity, GameObject.Find("Content " + runePageData[i].name).transform);
-                temp.name = "Rune Button " + runePageData[i].runes[x].name;
-                temp.transform.Find("Rune Name").gameObject.GetComponent<Text>().text = "Name: " + runePageData[i].runes[x].name;
-                temp.transform.Find("Rune Description").gameObject.GetComponent<Text>().text = "Description: " + runePageData[i].runes[x].runeDescription;
-                temp.transform.Find("RunePicture").gameObject.GetComponent<Image>().sprite = runePageData[i].runes[x].runeAsset;
-                temp.GetComponent<Button>().onClick.AddListener(delegate { GameObject.Find("Game Manager").GetComponent<bookHandeler>().selectRune(); });
+        if (GameObject.Find("RuneScroll (Personality)").transform.Find("Viewport/Content personalityRunePage").transform.childCount == 0)
+        {
+            for (int i = 0; i < runePageData.Count; i++)
+            {
+                for (int x = 0; x < runePageData[i].runes.Count; x++)
+                {
+                    GameObject temp = Instantiate(runeSelectorPrefab, GameObject.Find("Content " + runePageData[i].name).transform.position, Quaternion.LookRotation(GameObject.Find("Content " + runePageData[i].name).transform.forward), GameObject.Find("Content " + runePageData[i].name).transform);
+                    temp.name = "Rune Button " + runePageData[i].runes[x].name;
+                    temp.transform.Find("Rune Name").gameObject.GetComponent<Text>().text = "Name: " + runePageData[i].runes[x].name;
+                    temp.transform.Find("Rune Description").gameObject.GetComponent<Text>().text = "Description: " + runePageData[i].runes[x].runeDescription;
+                    temp.transform.Find("RunePicture").gameObject.GetComponent<Image>().sprite = runePageData[i].runes[x].runeAsset;
+                    temp.GetComponent<Button>().onClick.AddListener(delegate { GameObject.Find("Game Manager").GetComponent<bookHandeler>().selectRune(); });
+                }
             }
-        }
-        bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
-        bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
-        bookObject.transform.Find("RightPage").gameObject.SetActive(false);
-        bookObject.transform.Find("HiddenPage").gameObject.SetActive(false);
+            bookObject.transform.Find("LeftPage").gameObject.SetActive(false);
+            bookObject.transform.Find("PageButtons").gameObject.SetActive(false);
+            bookObject.transform.Find("RightPage").gameObject.SetActive(false);
+            bookObject.transform.Find("HiddenPage").gameObject.SetActive(false);
 
-        bookObject.SetActive(false);
+            bookObject.SetActive(false);
+        }
+        
     }
 
     public void selectRune() {
@@ -60,6 +64,9 @@ public class bookHandeler : MonoBehaviour {
             
             carverScript.runeSelected = runePageData[currentRunePageIndex].runes.Where(runeDataContainer => runeDataContainer.name == new string(thingCalling.name.Replace("Rune Button ", ""))).FirstOrDefault();
             carverScript.runeTraceImage.sprite = carverScript.runeSelected.runeAsset;
+            if(GameObject.Find("Bound Rect").transform.childCount >0) Destroy(GameObject.Find("Bound Rect").transform.GetChild(0).gameObject);
+            GameObject temp = Instantiate(carverScript.runeSelected.linePlacesHolder, GameObject.Find("Bound Rect").transform);
+            temp.name = temp.name.Replace("(Clone)", "");
 
             switch (carverScript.runeSelected.runeType) {
                 case (runeTypes.personality):

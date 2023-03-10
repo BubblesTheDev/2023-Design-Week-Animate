@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeType: 0
   runeDescription: Born to cry.
-  personality: 2
-  motivation: 0
-  runeJob: 0
   runeAsset: {fileID: 21300000, guid: ce900a85298fff94bbf4fd192e1cb4cd, type: 3}
-  linePlaces:
-  - {x: -1.0944276, y: 0.37216058, z: 4.95}
-  - {x: -0.3776739, y: 0.39972827, z: 4.95}
-  - {x: -0.3638902, y: 1.0751307, z: 4.95}
-  - {x: 1.0144826, y: 1.0613471, z: 4.95}
-  - {x: 1.0006989, y: -1.0751307, z: 4.95}
-  - {x: -0.8738882, y: -1.0199957, z: 4.95}
-  - {x: 0.33907944, y: 0.027567653, z: 4.95}
+  linePlacesHolder: {fileID: 4539805726012690607, guid: fdbaeec3156c95c41851c23caf76e41f,
+    type: 3}
+  minTimeBetweenActions: 3
+  maxTimeBetweenActions: 5
+  sightRadius: 1
+  moveSpeed: 1
+  buildingsToPlace: []
+  stringsToAttack: []
